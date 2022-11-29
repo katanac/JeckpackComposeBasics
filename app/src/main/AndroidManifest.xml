@@ -13,29 +13,16 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.JetpackCompose"
         tools:targetApi="31">
+        <activity android:name=".logininsta.LoginIgActivity" />
         <activity
-            android:name=".Dialogs"
-            android:exported="true"
-            android:label="@string/title_activity_dialogs"
-            android:theme="@style/Theme.JetpackCompose" >
+            android:name=".twit.TemplateActivity"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-
         </activity>
-        <activity
-            android:name=".CompontsJeckpack"
-            android:exported="true"
-            android:label="@string/title_activity_componts_jeckpack"
-            android:theme="@style/Theme.JetpackCompose">
-
-        </activity>
-        <activity
-            android:name=".MainActivity"
-            android:exported="true"
-            android:theme="@style/Theme.JetpackCompose"/>
     </application>
 
 </manifest>
