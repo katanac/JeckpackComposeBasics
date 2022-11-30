@@ -2,4 +2,5 @@
     <string name="app_name">JetpackCompose</string>
     <string name="title_activity_componts_jeckpack">CompontsJeckpack</string>
     <string name="title_activity_dialogs">Dialogs</string>
+    <string name="title_activity_recycler">RecyclerActivity</string>
 </resources>
