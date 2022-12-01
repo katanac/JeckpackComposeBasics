@@ -17,25 +17,26 @@
             android:name=".Dialogs"
             android:exported="true"
             android:label="@string/title_activity_dialogs"
-            android:theme="@style/Theme.JetpackCompose" >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+            android:theme="@style/Theme.JetpackCompose">
 
         </activity>
         <activity
             android:name=".CompontsJeckpack"
             android:exported="true"
             android:label="@string/title_activity_componts_jeckpack"
-            android:theme="@style/Theme.JetpackCompose">
-
-        </activity>
+            android:theme="@style/Theme.JetpackCompose"></activity>
         <activity
             android:name=".MainActivity"
             android:exported="true"
-            android:theme="@style/Theme.JetpackCompose"/>
+            android:theme="@style/Theme.JetpackCompose" />
+        <activity android:name=".scaffiold.ScaffoldActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
     </application>
 
 </manifest>
