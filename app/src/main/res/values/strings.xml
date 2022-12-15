@@ -3,4 +3,5 @@
     <string name="title_activity_componts_jeckpack">CompontsJeckpack</string>
     <string name="title_activity_dialogs">Dialogs</string>
     <string name="title_activity_scaffold">ScaffoldActivity</string>
+    <string name="title_activity_animaciones">AnimacionesActivity</string>
 </resources>
