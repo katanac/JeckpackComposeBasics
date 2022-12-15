@@ -9,6 +9,8 @@ import androidx.compose.material.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import com.example.jetpackcompose.login.ui.LoginScreen
+import com.example.jetpackcompose.login.ui.LoginViewModel
 import com.example.jetpackcompose.ui.theme.JetpackComposeTheme
 
 class LoginIgActivity : ComponentActivity() {
@@ -21,7 +23,7 @@ class LoginIgActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colors.background
                 ) {
-                    LoginScreen()
+                    LoginScreen(LoginViewModel())
                 }
             }
         }
@@ -33,6 +35,6 @@ class LoginIgActivity : ComponentActivity() {
 @Composable
 fun DefaultPreview() {
     JetpackComposeTheme {
-        LoginScreen()
+        LoginScreen(LoginViewModel())
     }
 }

@@ -1,7 +1,6 @@
-package com.example.jetpackcompose.logininsta
+package com.example.jetpackcompose.login.ui
 
 import android.app.Activity
-import android.util.Patterns
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -15,6 +14,7 @@ import androidx.compose.material.icons.filled.VisibilityOff
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.*
+import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -30,16 +30,26 @@ import androidx.compose.ui.unit.sp
 import com.example.jetpackcompose.R
 
 @Composable
-fun LoginScreen() {
-    Box(
-        modifier = Modifier
-            .fillMaxSize()
-            .padding(8.dp)
-            .background(Color.White)
-    ) {
-        Hearder(Modifier.align(Alignment.TopEnd))
-        Body(Modifier.align(Alignment.Center))
-        Footer(Modifier.align(Alignment.BottomCenter))
+fun LoginScreen(loginViewModel: LoginViewModel) {
+
+    val isLoading: Boolean by loginViewModel.isLoading.observeAsState(false)
+
+    if (isLoading) {
+        Box(modifier = Modifier.fillMaxSize()) {
+            CircularProgressIndicator()
+        }
+    } else {
+        Box(
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(8.dp)
+                .background(Color.White)
+        ) {
+            Hearder(Modifier.align(Alignment.TopEnd))
+            Body(Modifier.align(Alignment.Center), loginViewModel)
+            Footer(Modifier.align(Alignment.BottomCenter))
+        }
+
     }
 
 }
@@ -85,21 +95,21 @@ fun Hearder(modifier: Modifier) {
 
 
 @Composable
-fun Body(modifier: Modifier) {
-    var email by rememberSaveable { mutableStateOf("") }
-    var password by rememberSaveable { mutableStateOf("") }
-    var loginEnable by rememberSaveable { mutableStateOf(false) }
+fun Body(modifier: Modifier, loginViewModel: LoginViewModel) {
+    val email: String by loginViewModel.email.observeAsState(initial = "")
+    val password: String by loginViewModel.password.observeAsState(initial = "")
+    val loginEnable: Boolean by loginViewModel.loginEnable.observeAsState(initial = false)
 
     Column(modifier = modifier.padding(10.dp)) {
         ImageHeader(Modifier.align(Alignment.CenterHorizontally))
         Spacer(modifier = Modifier.size(16.dp))
-        TextFildEmail(email) { email = it }
+        TextFildEmail(email) { loginViewModel.onChangedLogin(it, password) }
         Spacer(modifier = Modifier.size(8.dp))
-        TexFieldPassword(password) { password = it }
+        TexFieldPassword(password) { loginViewModel.onChangedLogin(email, it) }
         Spacer(modifier = Modifier.size(8.dp))
         TextForgotten(Modifier.align(Alignment.End))
         Spacer(modifier = Modifier.size(16.dp))
-        ButtonLogin(validEmailAndPassword(email,password))
+        ButtonLogin(loginEnable, loginViewModel)
         Spacer(modifier = Modifier.size(16.dp))
         LoginOr()
         Spacer(modifier = Modifier.size(32.dp))
@@ -180,9 +190,11 @@ fun TexFieldPassword(text: String, onChangeValue: (String) -> Unit) {
 }
 
 @Composable
-fun ButtonLogin(loginEnable: Boolean) {
+fun ButtonLogin(loginEnable: Boolean, loginViewModel: LoginViewModel) {
     Button(
-        onClick = {}, enabled = loginEnable, modifier = Modifier.fillMaxWidth(),
+        onClick = { loginViewModel.onLoginSelected() },
+        enabled = loginEnable,
+        modifier = Modifier.fillMaxWidth(),
         colors = ButtonDefaults.buttonColors(
             backgroundColor = Color(0xFF4EA8E9), disabledBackgroundColor = Color(
                 0xFF82C4F3
@@ -251,6 +263,3 @@ fun SocialLogin() {
 }
 
 
-fun validEmailAndPassword(email: String, password: String): Boolean {
-    return Patterns.EMAIL_ADDRESS.matcher(email).matches() && password.length >= 6
-}
