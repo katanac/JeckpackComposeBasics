@@ -23,6 +23,7 @@ class RecyclerActivity : ComponentActivity() {
                     color = MaterialTheme.colors.background
                 ) {
 
+                    RecycerHeroes()
                 }
             }
         }
